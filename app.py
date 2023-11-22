@@ -24,6 +24,11 @@ def make_result_generator(reader, options):
             stream.write_batch(batch)
             yield f.getvalue()
 
+        f.seek(0)
+        f.truncate(0)
+        stream.close()
+        yield f.getvalue()
+
 
 @app.route("/get_ipc")
 def get_ipc():
